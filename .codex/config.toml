@@ -1,0 +1,17 @@
+# V3 project-level Codex config entry.
+#
+# This file intentionally starts as comment-only guidance:
+# - confirm the current Codex config keys before writing active options
+# - keep only the options that the real project actually uses
+# - never put secrets directly in this file
+#
+# Recommended fill order:
+# 1. confirm provider / auth source
+# 2. confirm default model / reasoning profile
+# 3. confirm sandbox / approval defaults
+# 4. confirm any project-local tool or connector policy
+#
+# Editing rules:
+# - do not guess undocumented keys
+# - when config changes affect workflow, sync README / AGENTS / PROJECT_RULES
+# - prefer local env or approved secret storage for sensitive values
