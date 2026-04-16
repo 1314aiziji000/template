@@ -60,7 +60,7 @@ run_package_script() {
 }
 
 ai_pack_active=0
-for path in "evals" "prompts" "configs/models"; do
+for path in "evals" "prompts"; do
     if [[ -d "${path}" ]] && find "${path}" -type f ! -name 'README.md' -print -quit | grep -q .; then
         ai_pack_active=1
         break
@@ -74,7 +74,7 @@ if [[ -n "${V3_EVAL_COMMAND:-}" ]]; then
 fi
 
 if (( ai_pack_active == 0 )); then
-    log "No active AI Pack material detected under evals/, prompts/ or configs/models/. Nothing to run."
+    log "No active AI Pack material detected under evals/ or prompts/. Nothing to run."
     exit 0
 fi
 

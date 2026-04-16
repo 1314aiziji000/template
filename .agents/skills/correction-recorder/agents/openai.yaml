@@ -1,0 +1,5 @@
+interface:
+  display_name: "Correction Recorder"
+  short_description: "Help with Correction Recorder tasks"
+policy:
+  allow_implicit_invocation: false

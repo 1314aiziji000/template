@@ -1,0 +1,5 @@
+interface:
+  display_name: "Dev Planner"
+  short_description: "Help with Dev Planner tasks"
+policy:
+  allow_implicit_invocation: true

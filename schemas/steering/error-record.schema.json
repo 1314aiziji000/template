@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "V3 Error Record",
+  "type": "object",
+  "required": [
+    "id",
+    "created_at",
+    "signal_type",
+    "summary",
+    "root_cause",
+    "remediation",
+    "prevention"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "signal_type": {
+      "type": "string"
+    },
+    "source_skill": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "related_records": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "root_cause": {
+      "type": "string"
+    },
+    "remediation": {
+      "type": "string"
+    },
+    "prevention": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

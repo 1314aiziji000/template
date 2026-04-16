@@ -1,0 +1,69 @@
+version: 1
+
+cases:
+  - id: scenario-coverage
+    type: scenario_coverage
+    skills_dir: .agents/skills
+    scenarios_dir: workspaces/v3-validation-pack/scenarios
+    required_sections:
+      - "## 正例"
+      - "## 反例"
+      - "## 验证重点"
+    extra_scenarios:
+      - full-closure
+
+  - id: source-mode-fixture-verify
+    type: command
+    workdir: workspaces/v3-validation-pack/sandboxes/source-mode-fixture
+    command:
+      - bash
+      - scripts/verify.sh
+    env:
+      V3_SKIP_VALIDATION_PACK: "1"
+    expect_exit_code: 0
+
+  - id: closure-fixture-verify
+    type: command
+    workdir: workspaces/v3-validation-pack/sandboxes/closure-fixture
+    command:
+      - bash
+      - scripts/verify.sh
+    env:
+      V3_SKIP_VALIDATION_PACK: "1"
+    expect_exit_code: 0
+
+  - id: skills-officialization
+    type: skill_validator
+    report: workspaces/v3-validation-pack/reports/07-skills-officialization.md
+    expected_skill_count: 12
+
+  - id: steering-threshold-regression
+    type: steering_scan
+    errors_dir: workspaces/v3-validation-pack/artifacts/steering/errors
+    expected:
+      proposal_count: 1
+      proposal_type: rule-graduation
+      signal_type: boundary-drift
+      repeat_count: 3
+      target_owner: AGENTS.md
+      target_path: AGENTS.md
+    rejected_proposal_types:
+      - protocol-hardening
+
+  - id: self-memory-e2e
+    type: self_memory_flow
+    raw_dir: workspaces/v3-validation-pack/artifacts/self-memory/raw
+    month: "2026-04"
+    report_mode: periodic
+    expected:
+      extracts: 2
+      batches: 1
+      reports: 1
+      manifest_keys:
+        - raw_id
+        - source_date
+        - hash
+        - counts
+        - extract_refs
+        - report_refs
+        - purged_at

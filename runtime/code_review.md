@@ -1,9 +1,10 @@
 # code_review.md
 
-## 文件定位
+## 作用
 
-本文件是 `runtime/` 下的 review 协议。  
-正式审查记录归档到 `runtime/reviews/`。
+- 本文件定义默认 review 协议
+- 正式审查记录归档到 `runtime/reviews/`
+- 本文件不承担任务分流或代码实施规则
 
 ## 固定输出顺序
 
@@ -12,11 +13,55 @@
 3. `Evidence checked`
 4. `Final recommendation`
 
-## 结论定义
+## 硬规则
 
-- `Accept`：目标达成，证据足够，剩余风险已说明
-- `Hold`：方向可接受，但仍缺验证、修正或关键信息
-- `Reject`：目标未达成，或证据不足以支持当前结论
+- review 先对照目标与边界，再看证据与风险
+- review 不直接偷偷改代码
+- `Final recommendation` 只允许 `Accept / Hold / Reject`
+- 没有足够证据时，不给 `Accept`
+
+## 记录条件
+
+- 中改及以上任务
+- 高风险任务
+- 发布前正式审查
+- AI 行为变更且需要正式 review 留痕
+
+命中这些条件时，按需把结果写入 `runtime/reviews/*.md`
+
+## 最小正式 review 骨架
+
+```md
+# Review Record
+
+## Meta
+- Date:
+- Task:
+- Scope:
+
+## Findings
+- ...
+
+## Risks not fully verified
+- ...
+
+## Evidence checked
+- Commands:
+  - `...`
+- Results:
+  - ...
+- Manual checks:
+  - ...
+
+## Final recommendation
+- Status: `Accept | Hold | Reject`
+- Next step:
+  - 回 `dev-builder`
+  - 回 `bug-fixer`
+  - 回 `dev-planner`
+  - 进入 `release-builder`
+  - 进入其他 Gate
+```
 
 ## Verification Evidence
 

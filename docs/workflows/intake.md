@@ -1,54 +1,52 @@
 # intake
 
-## 进入条件
+## 作用
 
-- 接到新任务、返工任务或范围变更
-- 需要判断 `Size + Risk`
-- 需要决定是否启用 `runtime/PLANS.md`
+- 本文件是任务入口骨架，owner 属于 workflow
+- 本文件允许最少导航，但只回答进入条件、`Size + Risk`、必备产物和下一跳
+- 路由契约仍以各 skill 的 `description` 为准；本文件不写 skill 内部规则
 
-## 任务入口
+## 进入前检查
 
-`V3` 默认接住下面 4 类入口：
+- 如果根级仍存在 `项目说明书.md`，先进入 `bootstrap.md`
+- 如果 `.agents/skills/project-bootstrap/` 仍存在且用户目标是初始化，先完成一次性 bootstrap，再回到普通任务接入
 
-- 新功能或需求变更
-- bug、异常、报错
-- 重构或结构调整
-- 发布、交付、收口请求
+## 特殊入口
 
-所有入口先统一做 4 件事：
+| 请求特征 | 典型去向 | 说明 |
+| --- | --- | --- |
+| 用户输入 `下一个窗口` 或 `下一窗口` | `context-handoff` | 进入承接生成或承接确认 |
+| 新窗口收到承接快照 | `context-handoff` | 第一条回复只允许 `明白` 或 `不明白` |
+| 命中 `git add`、`commit`、`push`、同步 Git / GitHub、上传 GitHub | `git-upload-logger` | 上传范围与结果由真实 Git 结果记录 |
+| 新项目首次接入且用户输入 `开始` | `project-bootstrap` | 仍属初始化，不进入日常主链 |
 
-1. 读根级入口文件
+## 常规接入
+
+未命中特殊入口时，先完成下面 4 项判断：
+
+1. 读取根级入口文件
 2. 判断任务类型
 3. 判断 `Size`
 4. 判断 `Risk`
 
-## 双轴分级
+## `Size + Risk`
 
 每个任务都必须同时判断两个维度：
 
 - `Size`: `Small / Medium / Large`
 - `Risk`: `Low / Medium / High`
 
-### Size 判断
+### `Size`
 
 | 等级 | 典型特征 | 默认处理 |
 | --- | --- | --- |
-| `Small` | 单点修正、`1-2` 个文件、无结构变化 | 可直改，但仍要最小验证和最小 review |
+| `Small` | 单点修正、`1-2` 个文件、无结构变化 | 可直接进入实施，但仍要最小验证 |
 | `Medium` | 多文件联动、同模块新增或调整 | 先做简计划，再实施 |
 | `Large` | 跨模块、多步骤、重构、迁移、跨会话推进 | 必须进入正式计划 |
 
-### Risk 判断
+### `Risk`
 
-`Risk` 至少支持这些标签：
-
-- `security`
-- `data`
-- `migration`
-- `public-api`
-- `infra`
-- `ai-behavior`
-
-判高风险的典型情况包括：
+高风险典型场景：
 
 - 权限、鉴权、密钥、外部服务权限
 - 数据迁移、结构变更、删除或回填
@@ -58,34 +56,20 @@
 
 ## 抬级规则
 
-高风险任务自动抬升一个执行等级。
+- 高风险任务自动抬升一个执行等级
+- `Small + High Risk` 按 `Medium` 执行
+- `Medium + High Risk` 按 `Large` 执行
 
-例如：
+## 常见下一跳
 
-- `Small + High Risk` -> 按 `Medium` 执行
-- `Medium + High Risk` -> 按 `Large` 执行
-
-这条规则优先于“只看改动范围”的直觉判断。
-
-## 什么时候必须先计划
-
-下面这些情况默认必须进入正式计划：
-
-- `Large`
-- `Medium + Medium Risk`
-- `Medium + High Risk`
-- 需要跨会话承接
-- 预计会暂停恢复
-- 需要多阶段推进
-- 会联动测试、审查、发布、回滚
-
-## 关键步骤
-
-- 判断任务规模与风险等级
-- 明确范围、非目标和最小验证
-- 判断是否需要失败证据优先
-- 决定走直跑路径还是计划路径
-- 判断是否会命中发布、安全或 AI 行为门禁
+| 条件 | 典型去向 |
+| --- | --- |
+| 边界未清、风险抬级、跨会话、多阶段 | `dev-planner` |
+| 边界已清、准备实施 | `dev-builder` |
+| 已有失败证据、报错、复现步骤或 findings | `bug-fixer` |
+| 一轮实施完成，需要正式审查 | `code-review` |
+| 需要交付、部署、发布或正式收口 | `release-builder` |
+| 命中共享 gate | 先读相关 `docs/protocols/`，再回到对应 skill |
 
 ## 本阶段必须产出
 
@@ -96,9 +80,9 @@
 
 没有这 4 项，就不进入正式实施。
 
-## 出口产物
+## 退出去向
 
-- 任务路径判断
+- 进入对应 skill
 - 需要时创建或更新 `runtime/PLANS.md`
-- 需要时抬级到 review、release 或 AI eval 门禁
+- 需要时抬级到共享 gate
 - 明确是否进入 `build-verify-review` 或 `release-retro`

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Skill Validator"
+  short_description: "Help with Skill Validator tasks"
+policy:
+  allow_implicit_invocation: false

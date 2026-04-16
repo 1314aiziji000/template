@@ -1,28 +1,19 @@
 # workflows
 
-本目录放任务从接入到收口的流程骨架。  
-这里只写流程顺序、抬级条件、进入条件、退出条件与最小产物，不展开协议字段细节。
+本目录放 `V3` 的 workflow 导航。
+owner 在各 workflow 文件；这里不重写 skill 细则。
 
-## 阅读顺序
+## 当前范围
 
-1. `intake.md`
-2. `build-verify-review.md`
-3. `release-retro.md`
+- `bootstrap.md`：初始化阶段骨架
+- `intake.md`：任务入口骨架与 `Size + Risk` 概览
+- `build-verify-review.md`：实施、验证、审查、fix 回环骨架
+- `release-retro.md`：发布、交付、正式沉淀、规则升级骨架
 
-## 主链关系
+## workflow 停笔规则
 
-`V3` 的默认主链是：
-
-`intake -> build / verify / review -> release / retro`
-
-其中：
-
-- `intake` 负责判断当前任务走不走计划路径、会不会命中门禁
-- `build-verify-review` 负责把实施、验证、审查和修正连成正式闭环
-- `release-retro` 负责发布、交付、记录沉淀和规则升级
-
-## 使用原则
-
-- workflow 先回答“怎么流转”，不抢对应 skill 私有模板或共享 protocol 的字段职责
-- 一条 workflow 写清进入条件、关键步骤、出口产物和升级条件
-- 命中高风险、发布、AI 行为变更时，workflow 必须明确指向后续 `Gate`
+- 只写阶段顺序、进入条件、必备产物、下一跳
+- `intake.md` 仍属 workflow owner；允许最少导航，但不拥有 skill 内部规则
+- 路由契约仍以各 skill 的 `description` 为准
+- 不写共享 gate 固定字段
+- 不新增 companion workflow 来承接 `context-handoff` 或 `git-upload-logger`

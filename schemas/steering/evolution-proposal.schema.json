@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "V3 Evolution Proposal",
+  "type": "object",
+  "required": [
+    "id",
+    "created_at",
+    "status",
+    "proposal_type",
+    "signal_type",
+    "repeat_count",
+    "target_owner",
+    "target_path",
+    "source_records",
+    "summary",
+    "suggested_change",
+    "validation_plan"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "confirmed",
+        "graduated",
+        "rejected",
+        "superseded",
+        "expired"
+      ]
+    },
+    "proposal_type": {
+      "type": "string",
+      "enum": [
+        "rule-graduation",
+        "skill-adjustment",
+        "protocol-hardening",
+        "verify-hardening",
+        "new-skill-candidate"
+      ]
+    },
+    "signal_type": {
+      "type": "string"
+    },
+    "repeat_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "target_owner": {
+      "type": "string"
+    },
+    "target_path": {
+      "type": "string"
+    },
+    "source_records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "suggested_change": {
+      "type": "string"
+    },
+    "validation_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

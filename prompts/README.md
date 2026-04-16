@@ -1,20 +1,22 @@
 # prompts
 
-本目录用于 Prompt 物料。  
+## 作用
 
-## 什么时候启用
+- 本目录放 Prompt 物料
+- `prompts/README.md` 是混合文档：只做启用条件、边界和联动说明
+- 目录仅在当前存在或已启用时纳入联动
+
+## 启用条件
 
 - 项目存在系统 Prompt、角色 Prompt、工具调用 Prompt 或输出约束 Prompt
 - Prompt 变更需要进入 `AI Eval Gate`
 
-## 建议内容
+## 边界
 
-- Prompt 文件正文
-- 适用场景说明
-- 版本或变更说明
-- 与对应 eval case 的关联
+- Prompt 物料属于正式对象，不长期悬空在 `workspaces/`
+- Prompt 变更后，要同步更新 `evals/` 与相关模型配置说明
+- 具体评测要求回到 `evals/` 与 `docs/protocols/ai-eval-gate.md`
 
-## 使用边界
+## 联动
 
-- Prompt 物料是正式对象，不放到 `workspaces/` 长期悬空
-- Prompt 变更后要同步更新 `evals/` 与相关模型配置说明
+- 改 Prompt 时，检查 `evals/`、相关 `schemas/`、`scripts/run-evals.sh` 和命中的 skill 是否要同步

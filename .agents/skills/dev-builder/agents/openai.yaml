@@ -1,0 +1,5 @@
+interface:
+  display_name: "Dev Builder"
+  short_description: "Help with Dev Builder tasks"
+policy:
+  allow_implicit_invocation: true

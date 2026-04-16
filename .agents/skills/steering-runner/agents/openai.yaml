@@ -1,0 +1,5 @@
+interface:
+  display_name: "Steering Runner"
+  short_description: "Help with Steering Runner tasks"
+policy:
+  allow_implicit_invocation: false

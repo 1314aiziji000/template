@@ -1,17 +1,23 @@
-# V3 project-level Codex config entry.
+# V3 project-scoped Codex config
 #
-# This file intentionally starts as comment-only guidance:
-# - confirm the current Codex config keys before writing active options
-# - keep only the options that the real project actually uses
-# - never put secrets directly in this file
-#
-# Recommended fill order:
-# 1. confirm provider / auth source
-# 2. confirm default model / reasoning profile
-# 3. confirm sandbox / approval defaults
-# 4. confirm any project-local tool or connector policy
-#
-# Editing rules:
-# - do not guess undocumented keys
-# - when config changes affect workflow, sync README / AGENTS / PROJECT_RULES
-# - prefer local env or approved secret storage for sensitive values
+# 目标：
+# - 给公开模板一个保守、可直接落库的默认值
+# - 不把个人密钥、平台账号或环境专属值写进仓库
+# - 保持单代理优先；只有显式 delegation 时才启用轻量子代理
+
+project_root_markers = [".git"]
+model = "gpt-5.4"
+review_model = "gpt-5.4"
+model_reasoning_effort = "medium"
+model_reasoning_summary = "concise"
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false
+
+[agents]
+max_threads = 3
+max_depth = 1
+job_max_runtime_seconds = 1200
